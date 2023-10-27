@@ -13,6 +13,7 @@ import 'package:mini_project/data/apis/end_point.dart';
 import 'package:mini_project/data/enums/api_status.dart';
 import 'package:mini_project/data/enums/request_method.dart';
 import 'package:mini_project/models/data_spesialis_model.dart';
+import 'package:mini_project/modules/detail/rumah_sakit_detail_page.dart';
 import 'package:mini_project/modules/home/content/home_page.dart';
 import 'package:mini_project/services/location_services.dart';
 import 'package:mini_project/utils/app_color.dart';
@@ -180,76 +181,83 @@ class _RumahSakitFilterPageState extends State<RumahSakitFilterPage> {
                       physics: const BouncingScrollPhysics(),
                       itemCount: listData.length,
                       itemBuilder: (context, index) {
-                        return Card(
-                          elevation: 3,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
+                        return InkWell(
+                          onTap: () {
+                            AppNavigator.instance.push(MaterialPageRoute(
+                              builder: (context) => RumahSakitDetailPage(rumahSakit: listData[index]),
+                            ));
+                          },
                           child: Card(
-                            margin: const EdgeInsets.only(top: 10),
                             elevation: 3,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
+                              borderRadius: BorderRadius.circular(10),
                             ),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                listData[index]['image'] == null
-                                    ? Container(
-                                        height: 125,
-                                        width: 100,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10),
-                                          image: const DecorationImage(
-                                            image: AssetImage(AppImages.noimage),
-                                            fit: BoxFit.cover,
+                            child: Card(
+                              margin: const EdgeInsets.only(top: 10),
+                              elevation: 3,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  listData[index]['image'] == null
+                                      ? Container(
+                                          height: 125,
+                                          width: 100,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(10),
+                                            image: const DecorationImage(
+                                              image: AssetImage(AppImages.noimage),
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        )
+                                      : Container(
+                                          height: 125,
+                                          width: 100,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(10),
+                                            image: DecorationImage(
+                                                image: NetworkImage(
+                                                  listData[index]['image'].toString(),
+                                                ),
+                                                fit: BoxFit.cover),
                                           ),
                                         ),
-                                      )
-                                    : Container(
-                                        height: 125,
-                                        width: 100,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10),
-                                          image: DecorationImage(
-                                              image: NetworkImage(
-                                                listData[index]['image'].toString(),
+                                  Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            listData[index]['nama_rumah_sakit'],
+                                            style: GoogleFonts.montserrat(fontSize: 14, fontWeight: FontWeight.bold),
+                                            maxLines: 2,
+                                          ),
+                                          const SizedBox(height: 10),
+                                          Text(
+                                            listData[index]['alamat'],
+                                            maxLines: 3,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                          const SizedBox(height: 10),
+                                          Row(
+                                            children: [
+                                              const Icon(
+                                                Icons.location_on,
+                                                size: 15,
                                               ),
-                                              fit: BoxFit.cover),
-                                        ),
+                                              Text(listData[index]['dist']),
+                                            ],
+                                          )
+                                        ],
                                       ),
-                                Expanded(
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          listData[index]['nama_rumah_sakit'],
-                                          style: GoogleFonts.montserrat(fontSize: 14, fontWeight: FontWeight.bold),
-                                          maxLines: 2,
-                                        ),
-                                        const SizedBox(height: 10),
-                                        Text(
-                                          listData[index]['alamat'],
-                                          maxLines: 3,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                        const SizedBox(height: 10),
-                                        Row(
-                                          children: [
-                                            const Icon(
-                                              Icons.location_on,
-                                              size: 15,
-                                            ),
-                                            Text(listData[index]['dist']),
-                                          ],
-                                        )
-                                      ],
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         );

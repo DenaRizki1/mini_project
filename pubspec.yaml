@@ -47,12 +47,10 @@ dependencies:
   url_launcher: ^6.1.4
   material_design_icons_flutter: ^7.0.7296
   animate_do: ^3.0.2
-  photo_view: ^0.14.0
   google_fonts: ^2.3.3
   connectivity: ^3.0.6
   pull_to_refresh: ^2.0.0
   curved_navigation_bar: ^1.0.3
-  numberpicker: ^2.1.2
   google_maps_flutter: ^2.1.2
   map_launcher: ^2.5.0+1
   cached_network_image: ^3.2.0

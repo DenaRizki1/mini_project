@@ -82,15 +82,6 @@ void showToast(String message) {
   );
 }
 
-String getRandomString(int length) {
-  const chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
-  math.Random rnd = math.Random();
-
-  return String.fromCharCodes(
-    Iterable.generate(length, (_) => chars.codeUnitAt(rnd.nextInt(chars.length))),
-  );
-}
-
 void showDialogOpenGps(BuildContext context) {
   showDialog(
     context: context,
@@ -299,19 +290,6 @@ Future<bool> isNetworkAvailable() async {
   return false;
 }
 
-void exitApp() {
-  if (Platform.isAndroid) {
-    SystemNavigator.pop();
-  } else if (Platform.isIOS) {
-    exit(0);
-  }
-}
-
-extension StringCasingExtension on String {
-  String toCapitalized() => length > 0 ? '${this[0].toUpperCase()}${substring(1).toLowerCase()}' : '';
-  String toTitleCase() => replaceAll(RegExp(' +'), ' ').split(' ').map((str) => str.toCapitalized()).join(' ');
-}
-
 Future<bool> openUrl(String? url, {LaunchMode launchMode = LaunchMode.externalApplication}) async {
   if (url != null) {
     if (await canLaunchUrlString(url)) {
@@ -365,21 +343,4 @@ Widget itemDetail(bool isColor, String title, String value, {bool textRight = tr
       ],
     ),
   );
-}
-
-Color colorStatusAbsen(String statusAbsen) {
-  switch (statusAbsen) {
-    case "1":
-      return Colors.red;
-    case "2":
-      return Colors.blue;
-    case "3":
-      return Colors.orange;
-    case "4":
-      return Colors.green;
-    case "5":
-      return Colors.grey;
-    default:
-      return Colors.black;
-  }
 }

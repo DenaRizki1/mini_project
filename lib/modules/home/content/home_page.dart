@@ -646,23 +646,41 @@ class _HomePageState extends State<HomePage> {
         itemCount: listSp.length,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3, childAspectRatio: 0.9, crossAxisSpacing: 10, mainAxisSpacing: 10),
         itemBuilder: (context, index) {
-          return Card(
-            elevation: 4,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            color: Colors.white,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  Image.asset(_icon[index], height: 50),
-                  const SizedBox(height: 6),
-                  Text(
-                    listSp[index].namaSpesialis,
-                    textAlign: TextAlign.center,
+          return InkWell(
+            onTap: () {
+              if (latitude == 0 && longitude == 0) {
+                showDialog(
+                  context: context,
+                  builder: (context) => const AlertDialogOkWidget(message: "Lokasi belum ditemukan"),
+                );
+              } else {
+                AppNavigator.instance.push(MaterialPageRoute(
+                  builder: (context) => RumahSakitFilterPage(
+                    kdSpesialis: listSp[index],
+                    lat: latitude,
+                    long: longitude,
                   ),
-                ],
+                ));
+              }
+            },
+            child: Card(
+              elevation: 4,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              color: Colors.white,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    Image.asset(_icon[index], height: 50),
+                    const SizedBox(height: 6),
+                    Text(
+                      listSp[index].namaSpesialis,
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
               ),
             ),
           );
@@ -673,14 +691,14 @@ class _HomePageState extends State<HomePage> {
 
   final List _icon = [
     AppImages.gigi,
-    AppImages.noimage, //
+    AppImages.dalam,
     AppImages.anak,
-    AppImages.noimage, //
-    AppImages.noimage, //
-    AppImages.noimage, //
-    AppImages.noimage, //
-    AppImages.noimage, //
-    AppImages.noimage, //
+    AppImages.syaraf,
+    AppImages.kandungan,
+    AppImages.bedah,
+    AppImages.kulit,
+    AppImages.tht,
+    AppImages.mata,
     AppImages.jantung,
   ];
 }

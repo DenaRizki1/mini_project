@@ -5,4 +5,11 @@ class AppImages {
   static const jantung = 'assets/jantung.png';
   static const gigi = 'assets/gigi.png';
   static const anak = 'assets/anak.png';
+  static const bedah = 'assets/bedah.png';
+  static const kandungan = 'assets/kandungan.png';
+  static const kulit = 'assets/kulit.png';
+  static const mata = 'assets/mata.png';
+  static const dalam = 'assets/dalam.png';
+  static const syaraf = 'assets/syaraf.png';
+  static const tht = 'assets/tht.png';
 }
