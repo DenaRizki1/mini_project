@@ -56,6 +56,8 @@ dependencies:
   cached_network_image: ^3.2.0
   shared_preferences: ^2.0.7
   envied: ^0.3.0+3
+  month_picker_dialog_2: ^0.5.5
+  image_picker: ^0.8.4+9
 
 dev_dependencies:
   flutter_test:

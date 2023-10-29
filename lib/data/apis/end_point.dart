@@ -8,7 +8,9 @@ class EndPoint {
   static String addRumahSakitSpesialis = '${getBaseUrl()}/rumahsakit/addRumahSakitSpesialis';
   static String filterRumahSakit = '${getBaseUrl()}/rumahsakit/filterSpesialis';
   static String getDetailSpesialis = '${getBaseUrl()}/rumahsakit/getDetailSpesialis';
-  static String auth = '${getBaseUrl()}/user/auth';
-  static String loginAuth = '${getBaseUrl()}/user/loginAuth';
   static String openAiChat = 'https://api.openai.com/v1/completions';
+
+  static String daftarAkun = '${getBaseUrl()}/user/daftar';
+  static String loginAuth = '${getBaseUrl()}/user/loginAuth';
+  static String uploadProfile = '${getBaseUrl()}/user/uploadProfile';
 }

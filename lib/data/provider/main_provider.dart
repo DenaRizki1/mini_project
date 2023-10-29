@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_project/data/apis/api_connect.dart';
@@ -5,6 +7,7 @@ import 'package:mini_project/data/apis/end_point.dart';
 import 'package:mini_project/data/enums/request_method.dart';
 import 'package:mini_project/data/exceptions/api_error.dart';
 import 'package:mini_project/data/session/session.dart';
+import 'package:mini_project/modules/auth/login_page.dart';
 import 'package:mini_project/modules/home/beranda_page.dart';
 import 'package:mini_project/utils/constans.dart';
 import 'package:mini_project/utils/helpers.dart';
@@ -70,6 +73,47 @@ class MainProvider with ChangeNotifier {
         context: context,
         builder: (context) => AlertDialogOkWidget(message: "Terjadi kesalahan"),
       );
+    }
+  }
+
+  Future<void> daftar(String namaLengkap, String username, String password, String tglLahir, BuildContext context) async {
+    final network = await isNetworkAvailable();
+
+    if (!network) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialogOkWidget(message: "Tidak ada koneksi internet"),
+      );
+      return;
+    }
+
+    try {
+      showLoading();
+      final response = await ApiConnect.instance.request(
+        requestMethod: RequestMethod.post,
+        url: EndPoint.daftarAkun,
+        params: {
+          'nama_lengkap': namaLengkap,
+          'username': username,
+          'password': password,
+          'tgl_lahir': tglLahir,
+        },
+      );
+
+      dismissLoading();
+
+      if (response != null) {
+        if (response['success']) {
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialogOkWidget(message: "Berhasil Daftar"),
+          ).then((value) {
+            AppNavigator.instance.pushNamed(LoginPage.routeName);
+          });
+        }
+      }
+    } catch (e) {
+      log(e.toString());
     }
   }
 }

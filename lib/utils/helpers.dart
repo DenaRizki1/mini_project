@@ -242,10 +242,9 @@ InputDecoration textFieldDecoration({String textHint = "", Widget? prefixIcon, W
   return InputDecoration(
     hintText: textHint,
     suffixText: suffixText,
-    hintStyle: TextStyle(
-      color: Colors.grey.shade600,
+    hintStyle: const TextStyle(
+      color: Colors.black,
       fontSize: 12,
-      fontWeight: FontWeight.w100,
     ),
     disabledBorder: OutlineInputBorder(
       borderRadius: const BorderRadius.all(

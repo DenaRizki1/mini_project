@@ -79,7 +79,7 @@ class _ChatAiPageState extends State<ChatAiPage> {
                   child: TextField(
                     controller: chatEc,
                     decoration: textFieldDecoration(textHint: "Masukan Chat Anda"),
-                    maxLines: 5,
+                    maxLines: 10,
                     minLines: 1,
                   ),
                 ),

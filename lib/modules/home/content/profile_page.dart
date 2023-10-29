@@ -3,18 +3,23 @@ import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:mini_project/data/apis/api_connect.dart';
+import 'package:mini_project/data/apis/end_point.dart';
+import 'package:mini_project/data/exceptions/api_error.dart';
 import 'package:mini_project/data/session/session.dart';
 import 'package:mini_project/modules/auth/login_page.dart';
 import 'package:mini_project/utils/app_color.dart';
 import 'package:mini_project/utils/app_images.dart';
+import 'package:mini_project/utils/configs/api_config.dart';
 import 'package:mini_project/utils/constans.dart';
 import 'package:mini_project/utils/helpers.dart';
 import 'package:mini_project/utils/routes/app_navigator.dart';
+import 'package:mini_project/widgets/alert_dialog_ok_widget.dart';
 import 'package:mini_project/widgets/appbar_widget.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -24,7 +29,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  String foto = '', nama = '', tgl_lahir = '';
+  String foto = '', nama = '', tgl_lahir = '', filePath = '';
 
   @override
   void initState() {
@@ -35,6 +40,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Future getProfile() async {
     nama = (await getPrefrence(NAMA)).toString();
     foto = (await getPrefrence(FOTO)).toString();
+    log(foto + " Profile");
     tgl_lahir = (await getPrefrence(TANGGAL)).toString();
 
     setState(() {});
@@ -43,13 +49,100 @@ class _ProfilePageState extends State<ProfilePage> {
   void logout() {
     showLoading();
     Future.delayed(
-      Duration(seconds: 2),
+      const Duration(seconds: 2),
       () {
         dismissLoading();
         AppNavigator.instance.pushNamedAndRemoveUntil(LoginPage.routeName, (p0) => false);
         clearUserSession();
       },
     );
+  }
+
+  Future<void> imageSelector(String pickerType) async {
+    XFile? imageFile;
+    switch (pickerType) {
+      case "gallery":
+        try {
+          imageFile = await ImagePicker().pickImage(source: ImageSource.gallery, imageQuality: 100);
+        } catch (e) {
+          PermissionStatus permission = await Permission.storage.status;
+          if (permission == PermissionStatus.denied) {
+            //? Requesting the permission
+            PermissionStatus statusDenied = await Permission.storage.request();
+            if (statusDenied.isPermanentlyDenied) {
+              //? permission isPermanentlyDenied
+              alertOpenSetting;
+            }
+          }
+        }
+
+        break;
+
+      case "camera":
+        try {
+          imageFile = await ImagePicker().pickImage(source: ImageSource.camera, imageQuality: 80);
+        } catch (e) {
+          PermissionStatus permission = await Permission.camera.status;
+          if (permission == PermissionStatus.denied) {
+            //? Requesting the permission
+            PermissionStatus statusDenied = await Permission.camera.request();
+            if (statusDenied.isPermanentlyDenied) {
+              //? permission isPermanentlyDenied
+              alertOpenSetting;
+            }
+          }
+        }
+
+        break;
+    }
+
+    if (imageFile != null) {
+      log("You selected  image : ${imageFile.path}");
+      filePath = imageFile.path;
+      uploadProfile();
+    } else {
+      log("You have not taken image");
+    }
+  }
+
+  Future uploadProfile() async {
+    final network = await isNetworkAvailable();
+
+    if (!network) {
+      showDialog(
+        context: context,
+        builder: (context) => const AlertDialogOkWidget(message: "Tidak ada koneksi internet"),
+      );
+      return;
+    }
+
+    showLoading();
+
+    try {
+      final response = await ApiConnect.instance.uploadFile(
+        EndPoint.uploadProfile,
+        'foto_profile',
+        filePath,
+        {
+          'hash_user': (await getPrefrence(HASH_USER)).toString(),
+        },
+      );
+      dismissLoading();
+
+      if (response != null) {
+        if (response['success']) {
+          setPrefrence(FOTO, response['data'].toString());
+        }
+      }
+      await getProfile();
+      setState(() {});
+    } on ApiErrors catch (e) {
+      debugPrint(e.message.toString());
+      showToast(e.message.toString());
+    } catch (e) {
+      debugPrint(e.toString());
+      showToast("Terjadi kesalahan");
+    }
   }
 
   @override
@@ -73,31 +166,65 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: Column(
                   children: [
                     InkWell(
-                      child: CachedNetworkImage(
-                        width: 100,
-                        height: 100,
-                        imageUrl: foto,
-                        imageBuilder: (context, imageProvider) => Container(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(width: 2, color: Colors.grey),
-                            color: Colors.red,
-                            image: DecorationImage(
-                              image: imageProvider,
-                              fit: BoxFit.cover,
-                              scale: 0.8,
-                              alignment: Alignment.topCenter,
+                      onTap: () {
+                        showDialog<String>(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            contentPadding: const EdgeInsets.all(8),
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.of(context).pop();
+                                    imageSelector("camera");
+                                  },
+                                  child: const ListTile(
+                                    leading: Icon(Icons.camera),
+                                    title: Text("Kamera"),
+                                  ),
+                                ),
+                                const Divider(),
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.of(context).pop();
+                                    imageSelector("gallery");
+                                  },
+                                  child: const ListTile(
+                                    leading: Icon(Icons.folder),
+                                    title: Text("Galeri"),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                        ),
-                        progressIndicatorBuilder: (context, url, progressDownload) {
-                          return const Center(child: CupertinoActivityIndicator());
-                        },
-                        errorWidget: (context, url, error) {
-                          return const CircleAvatar(backgroundImage: AssetImage(AppImages.noimage), radius: 50);
-                        },
-                      ),
-                    )
+                        );
+                      },
+                      child: foto == ''
+                          ? Container(
+                              height: 100,
+                              width: 100,
+                              decoration: const BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage(AppImages.noimage),
+                                ),
+                                shape: BoxShape.circle,
+                              ),
+                            )
+                          : Container(
+                              height: 130,
+                              width: 130,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                    foto,
+                                  ),
+                                  fit: BoxFit.fill,
+                                ),
+                                shape: BoxShape.circle,
+                              ),
+                            ),
+                    ),
                   ],
                 ),
               ),

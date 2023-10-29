@@ -62,4 +62,35 @@ class ApiConnect {
     }
     return null;
   }
+
+  Future<Map<String, dynamic>?> uploadFile(String url, String keyFile, String filePath, Map<String, String> params) async {
+    try {
+      final request = MultipartRequest("POST", Uri.parse(url));
+
+      request.headers.addAll(headers);
+      request.fields.addAll(params);
+      request.files.add(await MultipartFile.fromPath(keyFile, filePath));
+
+      final streameResponse = await request.send();
+
+      final response = await Response.fromStream(streameResponse);
+
+      log("==================================================");
+      log(url);
+      log(params.toString());
+      log(response.body);
+
+      final result = jsonDecode(response.body);
+
+      return jsonDecode(response.body);
+    } on SocketException {
+      showToast("Tidak ada koneksi internet");
+      Future.error("Tidak ada koneksi internet");
+    } catch (e) {
+      log(e.toString());
+      showToast("Terjadi kesalahan");
+      Future.error("Terjadi kesalahan");
+    }
+    return null;
+  }
 }

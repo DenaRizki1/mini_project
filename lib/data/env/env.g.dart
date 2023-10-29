@@ -8,5 +8,5 @@ part of 'env.dart';
 
 class _Env {
   static const String apiKey =
-      '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';
+      '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';
 }
