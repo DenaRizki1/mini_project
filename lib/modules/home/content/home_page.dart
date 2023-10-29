@@ -7,12 +7,14 @@ import 'package:flutx/flutx.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:mini_project/data/apis/api_connect.dart';
 import 'package:mini_project/data/apis/end_point.dart';
 import 'package:mini_project/data/enums/api_status.dart';
 import 'package:mini_project/data/enums/request_method.dart';
 import 'package:mini_project/data/exceptions/api_error.dart';
 import 'package:mini_project/models/data_spesialis_model.dart';
+import 'package:mini_project/modules/chat/chat_ai_page.dart';
 import 'package:mini_project/modules/detail/rumah_sakit_detail_page.dart';
 import 'package:mini_project/modules/filter/rumah_sakit_filter_page.dart';
 import 'package:mini_project/modules/tambah_spesialis/tambah_spesialis_page.dart';
@@ -53,24 +55,23 @@ class _HomePageState extends State<HomePage> {
 
   Future getDataSp() async {
     listSp.clear();
+    final network = await isNetworkAvailable();
+    if (!network) {
+      showDialog(
+        context: context,
+        builder: (context) => const AlertDialogOkWidget(message: "Tidak ada koneksi internet"),
+      );
+
+      return;
+    }
     try {
       if (latitude == 0 && longitude == 0) {
         await getCurrentLocation();
       }
-      final network = await isNetworkAvailable();
 
       setState(() {
         _apiStatus = ApiStatus.loading;
       });
-
-      if (!network) {
-        showDialog(
-          context: context,
-          builder: (context) => const AlertDialogOkWidget(message: "Tidak ada jaringan internet"),
-        );
-
-        return;
-      }
 
       final response = await ApiConnect.instance.request(
         requestMethod: RequestMethod.post,
@@ -96,24 +97,23 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> getDataRumahSakit() async {
+    final network = await isNetworkAvailable();
+    if (!network) {
+      showDialog(
+        context: context,
+        builder: (context) => const AlertDialogOkWidget(message: "Tidak ada koneksi internet"),
+      );
+
+      return;
+    }
     try {
       if (latitude == 0 && longitude == 0) {
         await getCurrentLocation();
       }
-      final network = await isNetworkAvailable();
 
       setState(() {
         _apiStatus = ApiStatus.loading;
       });
-
-      if (!network) {
-        showDialog(
-          context: context,
-          builder: (context) => const AlertDialogOkWidget(message: "Tidak ada jaringan internet"),
-        );
-
-        return;
-      }
 
       final response = await ApiConnect.instance.request(
         requestMethod: RequestMethod.post,
@@ -417,6 +417,7 @@ class _HomePageState extends State<HomePage> {
                           InkWell(
                             onTap: () {
                               showModalBottomSheet(
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                                 context: context,
                                 isScrollControlled: true,
                                 builder: (context) {
@@ -641,27 +642,75 @@ class _HomePageState extends State<HomePage> {
   Widget MenuBuilder() {
     return Padding(
       padding: const EdgeInsets.all(12.0),
-      child: GridView.builder(
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: listSp.length,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3, childAspectRatio: 0.9, crossAxisSpacing: 10, mainAxisSpacing: 10),
-        itemBuilder: (context, index) {
-          return InkWell(
-            onTap: () {
-              if (latitude == 0 && longitude == 0) {
-                showDialog(
-                  context: context,
-                  builder: (context) => const AlertDialogOkWidget(message: "Lokasi belum ditemukan"),
-                );
-              } else {
-                AppNavigator.instance.push(MaterialPageRoute(
-                  builder: (context) => RumahSakitFilterPage(
-                    kdSpesialis: listSp[index],
-                    lat: latitude,
-                    long: longitude,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Align(
+            alignment: Alignment.center,
+            child: Container(
+              height: 10,
+              width: 70,
+              decoration: BoxDecoration(
+                color: Colors.grey,
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
+          GridView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: listSp.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3, childAspectRatio: 0.9, crossAxisSpacing: 10, mainAxisSpacing: 10),
+            itemBuilder: (context, index) {
+              return InkWell(
+                onTap: () {
+                  if (latitude == 0 && longitude == 0) {
+                    showDialog(
+                      context: context,
+                      builder: (context) => const AlertDialogOkWidget(message: "Lokasi belum ditemukan"),
+                    );
+                  } else {
+                    AppNavigator.instance.pop();
+                    AppNavigator.instance.push(MaterialPageRoute(
+                      builder: (context) => RumahSakitFilterPage(
+                        kdSpesialis: listSp[index],
+                        lat: latitude,
+                        long: longitude,
+                      ),
+                    ));
+                  }
+                },
+                child: Card(
+                  elevation: 4,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                ));
-              }
+                  color: Colors.white,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        Image.asset(_icon[index], height: 50),
+                        const SizedBox(height: 6),
+                        Text(
+                          listSp[index].namaSpesialis,
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+          const Divider(
+            thickness: 2,
+          ),
+          InkWell(
+            onTap: () {
+              AppNavigator.instance.pop();
+              AppNavigator.instance.pushNamed(ChatAiPage.routeName);
             },
             child: Card(
               elevation: 4,
@@ -673,18 +722,18 @@ class _HomePageState extends State<HomePage> {
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: [
-                    Image.asset(_icon[index], height: 50),
+                    Image.asset(AppImages.chat, height: 80),
                     const SizedBox(height: 6),
-                    Text(
-                      listSp[index].namaSpesialis,
+                    const Text(
+                      "Chat AI",
                       textAlign: TextAlign.center,
                     ),
                   ],
                 ),
               ),
             ),
-          );
-        },
+          ),
+        ],
       ),
     );
   }

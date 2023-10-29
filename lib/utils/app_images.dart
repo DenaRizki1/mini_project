@@ -12,4 +12,5 @@ class AppImages {
   static const dalam = 'assets/dalam.png';
   static const syaraf = 'assets/syaraf.png';
   static const tht = 'assets/tht.png';
+  static const chat = 'assets/chat.png';
 }

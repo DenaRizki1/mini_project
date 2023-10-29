@@ -10,4 +10,5 @@ class EndPoint {
   static String getDetailSpesialis = '${getBaseUrl()}/rumahsakit/getDetailSpesialis';
   static String auth = '${getBaseUrl()}/user/auth';
   static String loginAuth = '${getBaseUrl()}/user/loginAuth';
+  static String openAiChat = 'https://api.openai.com/v1/completions';
 }
