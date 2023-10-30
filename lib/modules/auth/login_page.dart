@@ -26,6 +26,8 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController usernameEc = TextEditingController();
   TextEditingController passwordEc = TextEditingController();
 
+  bool obscurePassword = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,17 +93,23 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     TextFormField(
                       controller: passwordEc,
+                      obscureText: obscurePassword,
                       validator: (value) {
                         if (value == null) {
                           return "Password tidak boleh kosong";
-                        } else if (value.length < 6) {
-                          return "Password harus lebih dari 6";
                         }
 
                         return null;
                       },
                       decoration: textFieldDecoration(
                         textHint: "Masukan Password",
+                        suffixIcon: InkWell(
+                          onTap: () {
+                            obscurePassword = !obscurePassword;
+                            setState(() {});
+                          },
+                          child: Icon(!obscurePassword ? Icons.visibility : Icons.visibility_off),
+                        ),
                       ),
                     ),
                     const SizedBox(height: 10),

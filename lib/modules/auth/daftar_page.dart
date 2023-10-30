@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:mini_project/data/provider/main_provider.dart';
 import 'package:mini_project/utils/helpers.dart';
 import 'package:mini_project/widgets/appbar_widget.dart';
@@ -24,6 +25,9 @@ class _DaftarAkunPageState extends State<DaftarAkunPage> {
   TextEditingController passwordEc = TextEditingController();
   TextEditingController konfimasiPasswordEc = TextEditingController();
   DateTime? selectedDate;
+
+  bool obscurePassword = true;
+  bool obscureKonfiPassword = true;
 
   final _formKey = GlobalKey<FormState>();
   @override
@@ -135,6 +139,7 @@ class _DaftarAkunPageState extends State<DaftarAkunPage> {
                     const SizedBox(height: 5),
                     TextFormField(
                       controller: passwordEc,
+                      obscureText: obscurePassword,
                       validator: (value) {
                         if (value!.isEmpty) {
                           return "Password tidak boleh kosong";
@@ -144,7 +149,16 @@ class _DaftarAkunPageState extends State<DaftarAkunPage> {
                           }
                         }
                       },
-                      decoration: textFieldDecoration(textHint: "Masukan Password"),
+                      decoration: textFieldDecoration(
+                        textHint: "Masukan Password",
+                        suffixIcon: InkWell(
+                          onTap: () {
+                            obscurePassword = !obscurePassword;
+                            setState(() {});
+                          },
+                          child: Icon(!obscurePassword ? Icons.visibility : Icons.visibility_off),
+                        ),
+                      ),
                     ),
                     const SizedBox(height: 12),
                     Row(
@@ -164,6 +178,7 @@ class _DaftarAkunPageState extends State<DaftarAkunPage> {
                     const SizedBox(height: 5),
                     TextFormField(
                       controller: konfimasiPasswordEc,
+                      obscureText: obscureKonfiPassword,
                       validator: (value) {
                         if (value!.isEmpty) {
                           return "Konfirmasi Password tidak boleh kosong";
@@ -173,7 +188,15 @@ class _DaftarAkunPageState extends State<DaftarAkunPage> {
                           }
                         }
                       },
-                      decoration: textFieldDecoration(textHint: "Masukan Konfirmasi Password"),
+                      decoration: textFieldDecoration(
+                          textHint: "Masukan Konfirmasi Password",
+                          suffixIcon: InkWell(
+                            onTap: () {
+                              obscureKonfiPassword = !obscureKonfiPassword;
+                              setState(() {});
+                            },
+                            child: Icon(!obscureKonfiPassword ? Icons.visibility : Icons.visibility_off),
+                          )),
                     ),
                     const SizedBox(height: 12),
                     Consumer<MainProvider>(

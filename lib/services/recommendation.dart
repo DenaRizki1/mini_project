@@ -31,7 +31,7 @@ class RecommendationService {
       };
 
       // String promptdata = "${chat} di daerah jakarta";
-      String promptdata = "${chat} di jakarta";
+      String promptdata = "${chat}";
 
       // String promptdata = "you are a smartphone expert. Please give me a recommendation from budget equals to $smartPhoneBudget with camera requirement $camera and Internal storage size $storage";
 

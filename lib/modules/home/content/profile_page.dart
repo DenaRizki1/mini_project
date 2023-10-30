@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -40,7 +39,6 @@ class _ProfilePageState extends State<ProfilePage> {
   Future getProfile() async {
     nama = (await getPrefrence(NAMA)).toString();
     foto = (await getPrefrence(FOTO)).toString();
-    log(foto + " Profile");
     tgl_lahir = (await getPrefrence(TANGGAL)).toString();
 
     setState(() {});
@@ -207,6 +205,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               decoration: const BoxDecoration(
                                 image: DecorationImage(
                                   image: AssetImage(AppImages.noimage),
+                                  fit: BoxFit.fill,
                                 ),
                                 shape: BoxShape.circle,
                               ),

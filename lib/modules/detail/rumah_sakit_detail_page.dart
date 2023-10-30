@@ -14,6 +14,7 @@ import 'package:mini_project/utils/app_images.dart';
 import 'package:mini_project/utils/helpers.dart';
 import 'package:mini_project/widgets/alert_dialog_ok_widget.dart';
 import 'package:mini_project/widgets/appbar_widget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class RumahSakitDetailPage extends StatefulWidget {
   Map? rumahSakit;
@@ -140,7 +141,9 @@ class _RumahSakitDetailPageState extends State<RumahSakitDetailPage> {
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppColor.biru,
                           ),
-                          onPressed: () async {},
+                          onPressed: () async {
+                            launchUrl(Uri.parse('tel:${dataRs['hotline']}'));
+                          },
                           child: Text("Telephone Hotline"),
                         ),
                       ),
@@ -153,7 +156,9 @@ class _RumahSakitDetailPageState extends State<RumahSakitDetailPage> {
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.red,
                           ),
-                          onPressed: () async {},
+                          onPressed: () async {
+                            launchUrl(Uri.parse('tel:${dataRs['emergency']}'));
+                          },
                           child: Text("Telephone Emergency"),
                         ),
                       ),
@@ -166,7 +171,9 @@ class _RumahSakitDetailPageState extends State<RumahSakitDetailPage> {
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppColor.hijau,
                           ),
-                          onPressed: () async {},
+                          onPressed: () async {
+                            launchUrl(Uri.parse('tel:${dataRs['customer_service']}'));
+                          },
                           child: Text("Telephone Layanan"),
                         ),
                       ),
