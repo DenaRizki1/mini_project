@@ -13,4 +13,5 @@ class AppImages {
   static const syaraf = 'assets/syaraf.png';
   static const tht = 'assets/tht.png';
   static const chat = 'assets/chat.png';
+  static const avatar = 'assets/avatar_place.png';
 }

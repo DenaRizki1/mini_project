@@ -225,7 +225,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               width: 100,
                               decoration: const BoxDecoration(
                                 image: DecorationImage(
-                                  image: AssetImage(AppImages.noimage),
+                                  image: AssetImage(AppImages.avatar),
                                   fit: BoxFit.fill,
                                 ),
                                 shape: BoxShape.circle,

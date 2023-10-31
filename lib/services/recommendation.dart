@@ -47,10 +47,8 @@ class RecommendationService {
 
       var response = await http.post(Uri.parse(url), headers: headers, body: data);
 
-      if (response.statusCode == 200) {
-        log(response.body.toString());
-        gptData = gptDataFromJson(response.body);
-      }
+      log(response.body.toString());
+      gptData = gptDataFromJson(response.body);
     } catch (e) {
       throw Exception(e);
     }
