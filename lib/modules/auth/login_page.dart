@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mini_project/data/apis/api_connect.dart';
-import 'package:mini_project/data/apis/end_point.dart';
-import 'package:mini_project/data/enums/request_method.dart';
-import 'package:mini_project/data/exceptions/api_error.dart';
 import 'package:mini_project/data/provider/main_provider.dart';
 import 'package:mini_project/modules/auth/daftar_page.dart';
-import 'package:mini_project/modules/home/beranda_page.dart';
 import 'package:mini_project/utils/app_images.dart';
 import 'package:mini_project/utils/helpers.dart';
 import 'package:mini_project/utils/routes/app_navigator.dart';
-import 'package:mini_project/widgets/alert_dialog_ok_widget.dart';
 import 'package:mini_project/widgets/appbar_widget.dart';
 import 'package:provider/provider.dart';
 

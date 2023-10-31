@@ -23,6 +23,7 @@ class LocationService {
 
     switch (hasPermission) {
       case 1:
+        // ignore: use_build_context_synchronously
         showDialogOpenGps(context);
         return null;
 
@@ -30,6 +31,7 @@ class LocationService {
         return null;
 
       case 3:
+        // ignore: use_build_context_synchronously
         showDialogOpenSettingLocationPermission(context);
         return null;
 
@@ -40,7 +42,7 @@ class LocationService {
             // showToast("Anda terdeteksi menggunakan lokasi palsu");
             showDialog(
               context: context,
-              builder: (context) => AlertDialogOkWidget(message: "Anda terdereksi menggunakan lokasi palsu"),
+              builder: (context) => const AlertDialogOkWidget(message: "Anda terdereksi menggunakan lokasi palsu"),
             );
           }
           return position;

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:flutter/material.dart';
+// ignore: depend_on_referenced_packages
 import 'package:http/http.dart';
 import 'package:mini_project/utils/configs/api_config.dart';
 import 'package:mini_project/data/enums/request_method.dart';
@@ -82,7 +82,7 @@ class ApiConnect {
 
       final result = jsonDecode(response.body);
 
-      return jsonDecode(response.body);
+      return result;
     } on SocketException {
       showToast("Tidak ada koneksi internet");
       Future.error("Tidak ada koneksi internet");

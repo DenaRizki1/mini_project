@@ -1,8 +1,4 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:mini_project/models/open_ai_model.dart';
@@ -155,6 +151,7 @@ class _ChatAiPageState extends State<ChatAiPage> {
     );
   }
 
+  // ignore: non_constant_identifier_names
   Widget AiSender(Map<String, dynamic> chat) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),

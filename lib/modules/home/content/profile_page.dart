@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
@@ -12,7 +11,6 @@ import 'package:mini_project/data/session/session.dart';
 import 'package:mini_project/modules/auth/login_page.dart';
 import 'package:mini_project/utils/app_color.dart';
 import 'package:mini_project/utils/app_images.dart';
-import 'package:mini_project/utils/configs/api_config.dart';
 import 'package:mini_project/data/constant/constans.dart';
 import 'package:mini_project/utils/helpers.dart';
 import 'package:mini_project/utils/routes/app_navigator.dart';
@@ -29,6 +27,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  // ignore: non_constant_identifier_names
   String foto = '', nama = '', tgl_lahir = '', filePath = '';
 
   @override
@@ -211,7 +210,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   },
                                   child: ListTile(
                                     leading: Icon(MdiIcons.image),
-                                    title: Text("View Image"),
+                                    title: const Text("View Image"),
                                   ),
                                 ),
                               ],

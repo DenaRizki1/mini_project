@@ -1,13 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:mini_project/data/provider/main_provider.dart';
 import 'package:mini_project/utils/helpers.dart';
 import 'package:mini_project/widgets/appbar_widget.dart';
-import 'package:month_picker_dialog_2/month_picker_dialog_2.dart';
 import 'package:provider/provider.dart';
 
 class DaftarAkunPage extends StatefulWidget {
@@ -64,6 +58,7 @@ class _DaftarAkunPageState extends State<DaftarAkunPage> {
                         if (value!.isEmpty) {
                           return "Nama Lengkap tidak boleh kosong";
                         }
+                        return null;
                       },
                       decoration: textFieldDecoration(textHint: "Masukan Nama Lengkap"),
                     ),
@@ -89,6 +84,7 @@ class _DaftarAkunPageState extends State<DaftarAkunPage> {
                         if (value!.isEmpty) {
                           return "Username tidak boleh kosong";
                         }
+                        return null;
                       },
                       decoration: textFieldDecoration(textHint: "Masukan Username"),
                     ),
@@ -148,6 +144,8 @@ class _DaftarAkunPageState extends State<DaftarAkunPage> {
                             return "Password tidak sesuai";
                           }
                         }
+
+                        return null;
                       },
                       decoration: textFieldDecoration(
                         textHint: "Masukan Password",
@@ -187,6 +185,8 @@ class _DaftarAkunPageState extends State<DaftarAkunPage> {
                             return "Password tidak sesuai";
                           }
                         }
+
+                        return null;
                       },
                       decoration: textFieldDecoration(
                           textHint: "Masukan Konfirmasi Password",
@@ -215,7 +215,7 @@ class _DaftarAkunPageState extends State<DaftarAkunPage> {
                                 );
                               }
                             },
-                            child: Text("Daftar"),
+                            child: const Text("Daftar"),
                           ),
                         );
                       },

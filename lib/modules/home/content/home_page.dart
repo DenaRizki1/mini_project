@@ -1,13 +1,9 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutx/flutx.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:mini_project/data/apis/api_connect.dart';
 import 'package:mini_project/data/apis/end_point.dart';
 import 'package:mini_project/data/enums/api_status.dart';
@@ -22,7 +18,6 @@ import 'package:mini_project/utils/app_color.dart';
 import 'package:mini_project/utils/app_images.dart';
 import 'package:mini_project/utils/helpers.dart';
 import 'package:mini_project/utils/routes/app_navigator.dart';
-import 'package:mini_project/utils/routes/app_routes.dart';
 import 'package:mini_project/widgets/alert_dialog_ok_widget.dart';
 import 'package:mini_project/widgets/appbar_widget.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -438,7 +433,7 @@ class _HomePageState extends State<HomePage> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: Column(
                                   children: [
-                                    Container(
+                                    SizedBox(
                                       height: 50,
                                       width: 50,
                                       child: Column(
@@ -638,6 +633,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  // ignore: non_constant_identifier_names
   Widget MenuBuilder() {
     return Padding(
       padding: const EdgeInsets.all(12.0),

@@ -9,5 +9,5 @@ String getBasicAuth() {
 }
 
 String getBaseUrl() {
-  return 'http://${ip}/rumah_sakit';
+  return 'http://$ip/rumah_sakit';
 }

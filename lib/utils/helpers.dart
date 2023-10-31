@@ -1,9 +1,8 @@
 import 'dart:developer';
-import 'dart:io';
 
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutx/flutx.dart';
 import 'package:geolocator/geolocator.dart';
@@ -15,7 +14,6 @@ import 'package:mini_project/utils/routes/app_navigator.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
-import 'dart:math' as math;
 
 import 'package:url_launcher/url_launcher_string.dart';
 

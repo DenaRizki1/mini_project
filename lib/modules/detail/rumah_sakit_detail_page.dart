@@ -1,9 +1,6 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:map_launcher/map_launcher.dart';
 import 'package:mini_project/data/apis/api_connect.dart';
@@ -16,6 +13,7 @@ import 'package:mini_project/widgets/alert_dialog_ok_widget.dart';
 import 'package:mini_project/widgets/appbar_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+// ignore: must_be_immutable
 class RumahSakitDetailPage extends StatefulWidget {
   Map? rumahSakit;
   RumahSakitDetailPage({Key? key, required this.rumahSakit}) : super(key: key);
@@ -43,7 +41,7 @@ class _RumahSakitDetailPageState extends State<RumahSakitDetailPage> {
       if (!network) {
         return showDialog(
           context: context,
-          builder: (context) => AlertDialogOkWidget(message: "Tidak ada koneksi internet"),
+          builder: (context) => const AlertDialogOkWidget(message: "Tidak ada koneksi internet"),
         );
       }
 
@@ -144,7 +142,7 @@ class _RumahSakitDetailPageState extends State<RumahSakitDetailPage> {
                           onPressed: () async {
                             launchUrl(Uri.parse('tel:${dataRs['hotline']}'));
                           },
-                          child: Text("Telephone Hotline"),
+                          child: const Text("Telephone Hotline"),
                         ),
                       ),
                     ),
@@ -159,7 +157,7 @@ class _RumahSakitDetailPageState extends State<RumahSakitDetailPage> {
                           onPressed: () async {
                             launchUrl(Uri.parse('tel:${dataRs['emergency']}'));
                           },
-                          child: Text("Telephone Emergency"),
+                          child: const Text("Telephone Emergency"),
                         ),
                       ),
                     ),
@@ -174,7 +172,7 @@ class _RumahSakitDetailPageState extends State<RumahSakitDetailPage> {
                           onPressed: () async {
                             launchUrl(Uri.parse('tel:${dataRs['customer_service']}'));
                           },
-                          child: Text("Telephone Layanan"),
+                          child: const Text("Telephone Layanan"),
                         ),
                       ),
                     ),
@@ -249,9 +247,9 @@ class _RumahSakitDetailPageState extends State<RumahSakitDetailPage> {
                           width: 40,
                         ),
                         const SizedBox(width: 12),
-                        Text(
+                        const Text(
                           "Lokasi Map",
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: Colors.black,
                             fontSize: 15,
                             fontWeight: FontWeight.bold,

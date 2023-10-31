@@ -1,6 +1,3 @@
-import 'dart:developer';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_project/data/apis/api_connect.dart';
 import 'package:mini_project/data/apis/end_point.dart';
@@ -21,7 +18,7 @@ class MainProvider with ChangeNotifier {
     if (!network) {
       showDialog(
         context: context,
-        builder: (context) => AlertDialogOkWidget(message: "Tidak ada koneksi internet"),
+        builder: (context) => const AlertDialogOkWidget(message: "Tidak ada koneksi internet"),
       );
       return;
     }
@@ -71,7 +68,7 @@ class MainProvider with ChangeNotifier {
 
       showDialog(
         context: context,
-        builder: (context) => AlertDialogOkWidget(message: "Terjadi kesalahan"),
+        builder: (context) => const AlertDialogOkWidget(message: "Terjadi kesalahan"),
       );
     }
   }
@@ -82,7 +79,7 @@ class MainProvider with ChangeNotifier {
     if (!network) {
       showDialog(
         context: context,
-        builder: (context) => AlertDialogOkWidget(message: "Tidak ada koneksi internet"),
+        builder: (context) => const AlertDialogOkWidget(message: "Tidak ada koneksi internet"),
       );
       return;
     }
@@ -106,7 +103,7 @@ class MainProvider with ChangeNotifier {
         if (response['success']) {
           showDialog(
             context: context,
-            builder: (context) => AlertDialogOkWidget(message: "Berhasil Daftar"),
+            builder: (context) => const AlertDialogOkWidget(message: "Berhasil Daftar"),
           ).then((value) {
             AppNavigator.instance.pushNamed(LoginPage.routeName);
           });

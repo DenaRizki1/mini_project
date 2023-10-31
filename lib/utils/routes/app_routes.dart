@@ -1,14 +1,13 @@
 import 'package:mini_project/modules/auth/daftar_page.dart';
 import 'package:mini_project/modules/auth/login_page.dart';
 import 'package:mini_project/modules/chat/chat_ai_page.dart';
-import 'package:mini_project/modules/filter/rumah_sakit_filter_page.dart';
 import 'package:mini_project/modules/home/beranda_page.dart';
-import 'package:mini_project/modules/home/content/home_page.dart';
 import 'package:mini_project/modules/splashscreen/splashscreen_page.dart';
 
 class AppRoutes {
   AppRoutes._();
 
+  // ignore: constant_identifier_names
   static const INITIAL = SplashScreenPage.routeName;
 
   static final routes = {

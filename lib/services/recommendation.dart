@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:intl/intl.dart';
 import 'package:mini_project/data/apis/end_point.dart';
 import 'package:mini_project/data/constant/open_ai.dart';
 import 'package:mini_project/models/open_ai_model.dart';
+
+// ignore: depend_on_referenced_packages
 import 'package:http/http.dart' as http;
-import 'package:mini_project/modules/auth/login_page.dart';
 
 class RecommendationService {
   Future<GptData> getrecommendation({
@@ -31,7 +31,7 @@ class RecommendationService {
       };
 
       // String promptdata = "${chat} di daerah jakarta";
-      String promptdata = "${chat}";
+      String promptdata = chat;
 
       // String promptdata = "you are a smartphone expert. Please give me a recommendation from budget equals to $smartPhoneBudget with camera requirement $camera and Internal storage size $storage";
 

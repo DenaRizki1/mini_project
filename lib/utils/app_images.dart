@@ -1,5 +1,7 @@
 class AppImages {
+  // ignore: constant_identifier_names
   static const rumah_sakit = 'assets/rumah_sakit.png';
+  // ignore: constant_identifier_names
   static const rumah_sakit1 = 'assets/rumah_sakit1.png';
   static const noimage = 'assets/no_image.png';
   static const jantung = 'assets/jantung.png';

@@ -1,23 +1,13 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:mini_project/data/apis/api_connect.dart';
-import 'package:mini_project/data/apis/end_point.dart';
-import 'package:mini_project/data/enums/request_method.dart';
-import 'package:mini_project/data/exceptions/api_error.dart';
 import 'package:mini_project/data/session/session.dart';
 import 'package:mini_project/modules/auth/login_page.dart';
 import 'package:mini_project/modules/home/beranda_page.dart';
-import 'package:mini_project/modules/home/content/home_page.dart';
 import 'package:mini_project/utils/app_images.dart';
 import 'package:mini_project/data/constant/constans.dart';
 import 'package:mini_project/utils/helpers.dart';
 import 'package:mini_project/utils/routes/app_navigator.dart';
-import 'package:mini_project/utils/routes/app_routes.dart';
-import 'package:mini_project/widgets/alert_dialog_ok_widget.dart';
-import 'package:provider/provider.dart';
 
 class SplashScreenPage extends StatefulWidget {
   const SplashScreenPage({super.key});
@@ -36,7 +26,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
 
   Future delaySplash() async {
     Future.delayed(
-      Duration(seconds: 5),
+      const Duration(seconds: 5),
       () => init(),
     );
   }

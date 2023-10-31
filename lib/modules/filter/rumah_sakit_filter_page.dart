@@ -1,11 +1,6 @@
 import 'dart:developer';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:geocoding/geocoding.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:mini_project/data/apis/api_connect.dart';
@@ -14,8 +9,6 @@ import 'package:mini_project/data/enums/api_status.dart';
 import 'package:mini_project/data/enums/request_method.dart';
 import 'package:mini_project/models/data_spesialis_model.dart';
 import 'package:mini_project/modules/detail/rumah_sakit_detail_page.dart';
-import 'package:mini_project/modules/home/content/home_page.dart';
-import 'package:mini_project/services/location_services.dart';
 import 'package:mini_project/utils/app_color.dart';
 import 'package:mini_project/utils/app_images.dart';
 import 'package:mini_project/utils/helpers.dart';
@@ -23,6 +16,7 @@ import 'package:mini_project/utils/routes/app_navigator.dart';
 import 'package:mini_project/widgets/alert_dialog_ok_widget.dart';
 import 'package:mini_project/widgets/appbar_widget.dart';
 
+// ignore: must_be_immutable
 class RumahSakitFilterPage extends StatefulWidget {
   DataSpesialisModel kdSpesialis;
   double? lat;
@@ -62,7 +56,7 @@ class _RumahSakitFilterPageState extends State<RumahSakitFilterPage> {
       if (!network) {
         showDialog(
           context: context,
-          builder: (context) => AlertDialogOkWidget(message: "Tidak ada koneksi internet"),
+          builder: (context) => const AlertDialogOkWidget(message: "Tidak ada koneksi internet"),
         );
         return null;
       }
@@ -133,12 +127,12 @@ class _RumahSakitFilterPageState extends State<RumahSakitFilterPage> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Text(
-                    "Radius ${radius} Km",
+                    "Radius $radius Km",
                     style: GoogleFonts.montserrat(color: Colors.white, fontSize: 14),
                   ),
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Visibility(
                 visible: changeRadius,
                 child: Row(
@@ -271,7 +265,7 @@ class _RumahSakitFilterPageState extends State<RumahSakitFilterPage> {
                   } else if (_apiStatus == ApiStatus.failed) {
                     return SizedBox(
                       height: MediaQuery.of(context).size.height * .8,
-                      child: Center(child: Text("Terjadi Kesalahan")),
+                      child: const Center(child: Text("Terjadi Kesalahan")),
                     );
                   } else {
                     return SizedBox(
