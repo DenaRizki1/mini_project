@@ -1,6 +1,6 @@
 // ignore_for_file: file_names
 
-import 'package:mini_project/utils/constans.dart';
+import 'package:mini_project/data/constant/constans.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> setPrefrence(String key, String value) async {

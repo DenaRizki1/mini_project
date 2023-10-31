@@ -9,7 +9,7 @@ import 'package:mini_project/data/exceptions/api_error.dart';
 import 'package:mini_project/data/session/session.dart';
 import 'package:mini_project/modules/auth/login_page.dart';
 import 'package:mini_project/modules/home/beranda_page.dart';
-import 'package:mini_project/utils/constans.dart';
+import 'package:mini_project/data/constant/constans.dart';
 import 'package:mini_project/utils/helpers.dart';
 import 'package:mini_project/utils/routes/app_navigator.dart';
 import 'package:mini_project/widgets/alert_dialog_ok_widget.dart';
@@ -110,10 +110,21 @@ class MainProvider with ChangeNotifier {
           ).then((value) {
             AppNavigator.instance.pushNamed(LoginPage.routeName);
           });
+        } else {
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialogOkWidget(message: response['message'].toString()),
+          );
         }
       }
+    } on ApiErrors catch (e) {
+      debugPrint(e.message.toString());
+
+      showToast(e.message.toString());
     } catch (e) {
-      log(e.toString());
+      debugPrint(e.toString());
+
+      showToast("Terjadi kesalahan");
     }
   }
 }

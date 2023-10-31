@@ -36,7 +36,7 @@ class _ChatAiPageState extends State<ChatAiPage> {
       Map<String, dynamic> message = {};
       message['pesan'] = "Mengetik...";
       message['pengirim_ai'] = true;
-      message['jam'] = "${DateTime.now().hour}:${DateTime.now().minute}";
+      message['jam'] = parseDateInd(DateTime.now().toString(), "HH:mm");
       chat.add(message);
       final response = await RecommendationService().getrecommendation(chat: chatEc.text);
 
@@ -45,7 +45,7 @@ class _ChatAiPageState extends State<ChatAiPage> {
       chat.removeLast();
       message['pesan'] = gptResponse!.choices[0].text.replaceAll('\n', "");
       message['pengirim_ai'] = true;
-      message['jam'] = "${DateTime.now().hour}:${DateTime.now().minute}";
+      message['jam'] = parseDateInd(DateTime.now().toString(), "HH:mm");
       chat.add(message);
       chatEc.clear();
       setState(() {});
@@ -95,7 +95,7 @@ class _ChatAiPageState extends State<ChatAiPage> {
 
                     message['pesan'] = chatEc.text;
                     message['pengirim_ai'] = false;
-                    message['jam'] = "12:00";
+                    message['jam'] = parseDateInd(DateTime.now().toString(), "HH:mm");
 
                     chat.add(message);
                     dismissKeyboard();

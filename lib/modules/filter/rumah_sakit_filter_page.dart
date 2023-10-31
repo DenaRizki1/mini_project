@@ -146,6 +146,7 @@ class _RumahSakitFilterPageState extends State<RumahSakitFilterPage> {
                     Expanded(
                       child: TextField(
                         controller: radiusEc,
+                        keyboardType: TextInputType.number,
                         decoration: textFieldDecoration(textHint: "Masukan Radius", suffixText: "Km"),
                       ),
                     ),

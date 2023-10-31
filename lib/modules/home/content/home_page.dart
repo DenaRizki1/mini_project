@@ -17,7 +17,6 @@ import 'package:mini_project/models/data_spesialis_model.dart';
 import 'package:mini_project/modules/chat/chat_ai_page.dart';
 import 'package:mini_project/modules/detail/rumah_sakit_detail_page.dart';
 import 'package:mini_project/modules/filter/rumah_sakit_filter_page.dart';
-import 'package:mini_project/modules/tambah_spesialis/tambah_spesialis_page.dart';
 import 'package:mini_project/services/location_services.dart';
 import 'package:mini_project/utils/app_color.dart';
 import 'package:mini_project/utils/app_images.dart';

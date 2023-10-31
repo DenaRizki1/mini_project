@@ -13,9 +13,10 @@ import 'package:mini_project/modules/auth/login_page.dart';
 import 'package:mini_project/utils/app_color.dart';
 import 'package:mini_project/utils/app_images.dart';
 import 'package:mini_project/utils/configs/api_config.dart';
-import 'package:mini_project/utils/constans.dart';
+import 'package:mini_project/data/constant/constans.dart';
 import 'package:mini_project/utils/helpers.dart';
 import 'package:mini_project/utils/routes/app_navigator.dart';
+import 'package:mini_project/utils/show_image_page.dart';
 import 'package:mini_project/widgets/alert_dialog_ok_widget.dart';
 import 'package:mini_project/widgets/appbar_widget.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -90,6 +91,15 @@ class _ProfilePageState extends State<ProfilePage> {
             }
           }
         }
+
+        break;
+
+      case "view":
+        AppNavigator.instance.push(
+          MaterialPageRoute(
+            builder: (context) => ShowImagePage(judul: foto.toString(), url: foto),
+          ),
+        );
 
         break;
     }
@@ -191,6 +201,17 @@ class _ProfilePageState extends State<ProfilePage> {
                                   child: const ListTile(
                                     leading: Icon(Icons.folder),
                                     title: Text("Galeri"),
+                                  ),
+                                ),
+                                const Divider(),
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.of(context).pop();
+                                    imageSelector("view");
+                                  },
+                                  child: ListTile(
+                                    leading: Icon(MdiIcons.image),
+                                    title: Text("View Image"),
                                   ),
                                 ),
                               ],

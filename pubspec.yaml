@@ -39,6 +39,7 @@ dependencies:
   geocoding: ^2.0.5
   geolocator: ^9.0.2
   intl: ^0.17.0
+  photo_view: ^0.13.0
   permission_handler: ^10.3.0
   flutter_easyloading: ^3.0.3
   loading_animation_widget: ^1.2.0+4

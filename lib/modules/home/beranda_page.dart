@@ -4,7 +4,6 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:mini_project/modules/home/content/home_page.dart';
 import 'package:mini_project/modules/home/content/profile_page.dart';
-import 'package:mini_project/modules/tambah_spesialis/tambah_spesialis_page.dart';
 import 'package:mini_project/utils/app_color.dart';
 
 class BerandaPage extends StatefulWidget {

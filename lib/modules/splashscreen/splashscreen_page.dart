@@ -12,7 +12,7 @@ import 'package:mini_project/modules/auth/login_page.dart';
 import 'package:mini_project/modules/home/beranda_page.dart';
 import 'package:mini_project/modules/home/content/home_page.dart';
 import 'package:mini_project/utils/app_images.dart';
-import 'package:mini_project/utils/constans.dart';
+import 'package:mini_project/data/constant/constans.dart';
 import 'package:mini_project/utils/helpers.dart';
 import 'package:mini_project/utils/routes/app_navigator.dart';
 import 'package:mini_project/utils/routes/app_routes.dart';
