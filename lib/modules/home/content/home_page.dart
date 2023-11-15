@@ -13,6 +13,7 @@ import 'package:mini_project/models/data_spesialis_model.dart';
 import 'package:mini_project/modules/chat/chat_ai_page.dart';
 import 'package:mini_project/modules/detail/rumah_sakit_detail_page.dart';
 import 'package:mini_project/modules/filter/rumah_sakit_filter_page.dart';
+import 'package:mini_project/modules/picker/picker_page.dart';
 import 'package:mini_project/services/location_services.dart';
 import 'package:mini_project/utils/app_color.dart';
 import 'package:mini_project/utils/app_images.dart';
@@ -702,32 +703,67 @@ class _HomePageState extends State<HomePage> {
           const Divider(
             thickness: 2,
           ),
-          InkWell(
-            onTap: () {
-              AppNavigator.instance.pop();
-              AppNavigator.instance.pushNamed(ChatAiPage.routeName);
-            },
-            child: Card(
-              elevation: 4,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              color: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    Image.asset(AppImages.chat, height: 80),
-                    const SizedBox(height: 6),
-                    const Text(
-                      "Chat AI",
-                      textAlign: TextAlign.center,
+          Row(
+            children: [
+              InkWell(
+                onTap: () {
+                  AppNavigator.instance.pop();
+                  AppNavigator.instance.pushNamed(ChatAiPage.routeName);
+                },
+                child: Card(
+                  elevation: 4,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  color: Colors.white,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        Image.asset(AppImages.chat, height: 80),
+                        const SizedBox(height: 6),
+                        const Text(
+                          "Chat AI",
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ),
-            ),
-          ),
+              const SizedBox(width: 5),
+              InkWell(
+                onTap: () {
+                  AppNavigator.instance.pop();
+                  AppNavigator.instance.push(
+                    MaterialPageRoute(
+                      builder: (context) => const PickerPage(),
+                    ),
+                  );
+                },
+                child: Card(
+                  elevation: 4,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  color: Colors.white,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        Image.asset(AppImages.chat, height: 80),
+                        const SizedBox(height: 6),
+                        const Text(
+                          "Tambah",
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          )
         ],
       ),
     );

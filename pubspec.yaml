@@ -58,6 +58,8 @@ dependencies:
   envied: ^0.3.0+3
   month_picker_dialog_2: ^0.5.5
   image_picker: ^0.8.4+9
+  file_picker: ^5.3.1
+  audioplayers: ^4.1.0
 
 dev_dependencies:
   flutter_test:

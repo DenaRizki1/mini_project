@@ -13,4 +13,6 @@ class EndPoint {
   static String daftarAkun = '${getBaseUrl()}/user/daftar';
   static String loginAuth = '${getBaseUrl()}/user/loginAuth';
   static String uploadProfile = '${getBaseUrl()}/user/uploadProfile';
+
+  static String uploadMp3 = '${getBaseUrl()}/user/upload';
 }
